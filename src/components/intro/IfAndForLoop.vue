@@ -5,8 +5,8 @@
     <div>
       請輸入你最不愛的水果 讓他消失：
       <input v-model="favoriteFruit" />
-      <div v-if="榴蓮">消失吧 榴蓮</div>
-      <div v-else-if="夏威夷披薩">消失吧 榴蓮</div>
+      <div v-if="favoriteFruit === '榴蓮'">消失吧 榴蓮</div>
+      <div v-else-if="favoriteFruit === '夏威夷披薩'">消失吧 夏威夷披薩</div>
       <div v-else>每個水果都有他的好 別亂來</div>
     </div>
     <h3>v-for</h3>
@@ -34,8 +34,9 @@ export default {
   name: "IfAndForLoop",
   data() {
     return {
+      favoriteFruit: "",
       hateFruit: "",
-      fruitData: ["apple", "orange", "banana", "applePen"],
+      fruitData: ["apple", "orange", "banana", "applePen", "applePen2"],
       selectedFruit: "apple",
     };
   },

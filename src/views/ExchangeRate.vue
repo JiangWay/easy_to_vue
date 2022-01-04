@@ -34,12 +34,17 @@
         </div>
         <div class="answer">
           <select v-model="currentCurrency">
-            <option
-              v-for="[currency] of Object.entries(rateData)"
+            <!-- <option
+              v-for="[currency] in Object.entries(rateData)"
               :key="currency"
               :selected="currentCurrency === 'TWD'"
+            > -->
+            <option
+              v-for="(value, key) in rateData"
+              :key="key"
+              :selected="currentCurrency === 'TWD'"
             >
-              {{ currency }}
+              {{ key }}
             </option>
           </select>
           <div>
@@ -123,11 +128,12 @@ export default {
     currencyBB: {
       get() {
         let rate = this.rateData[this.currentCurrency];
-        return this.currencyAA * rate;
+        // let rate = this.rateData.get(this.currentCurrency);
+        return this.currencyAA / rate;
       },
       set(val) {
         let rate = this.rateData[this.currentCurrency];
-        this.currencyAA = val / rate;
+        this.currencyAA = val * rate;
       },
     },
   },
@@ -140,7 +146,7 @@ export default {
     // question 2
     currencyA(newVal) {
       let rate = this.rateData[this.currentCurrency];
-      this.currencyB = newVal * rate;
+      this.currencyB = newVal / rate;
     },
   },
 };
