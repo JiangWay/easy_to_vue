@@ -13,10 +13,10 @@
 </template>
 
 <script>
-import MetodsAndComputedAndWatch from "@/components/intro/MetodsAndComputedAndWatch.vue";
-import ComputedGetAndSet from "@/components/intro/ComputedGetAndSet.vue";
-import ComputedAndWatch from "@/components/intro/ComputedAndWatch.vue";
-import IfAndForLoop from "@/components/intro/IfAndForLoop.vue";
+import MetodsAndComputedAndWatch from "@/components/intro/week1/MetodsAndComputedAndWatch.vue";
+import ComputedGetAndSet from "@/components/intro/week1/ComputedGetAndSet.vue";
+import ComputedAndWatch from "@/components/intro/week1/ComputedAndWatch.vue";
+import IfAndForLoop from "@/components/intro/week1/IfAndForLoop.vue";
 export default {
   data() {
     return {};

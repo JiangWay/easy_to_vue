@@ -1,16 +1,61 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>|
-      <router-link to="/exchangeRate">匯率換算</router-link>
-      <hr />
-      <router-link to="/IntroWeek1">IntroWeek1</router-link>|
+    <header class="sticky top-0 z-50 m-4">
+      <Header />
+    </header>
+    <div class="rounded-lg shadow bg-base-200 drawer">
+      <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+      <div
+        class="flex flex-col items-center justify-center drawer-content pb-64"
+      >
+        <router-view />
+      </div>
+      <div class="drawer-side">
+        <label for="my-drawer" class="drawer-overlay"></label>
+        <ul class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
+          <div class="divider">Menu</div>
+          <li v-for="item in menuItemList" :key="item.idx">
+            <router-link :to="item.to">{{ item.desc }}</router-link>
+          </li>
+          <div class="divider">練習</div>
+          <li v-for="item in practiceItemList" :key="item.idx">
+            <router-link :to="item.to">{{ item.desc }}</router-link>
+          </li>
+          <div class="divider">Intro</div>
+          <li v-for="item in introItemList" :key="item.idx">
+            <router-link :to="item.to">{{ item.desc }}</router-link>
+          </li>
+        </ul>
+      </div>
     </div>
-    <router-view />
   </div>
 </template>
 
+<script>
+import Header from "@/components/Header.vue";
+const MenuItemList = [
+  { idx: "m0", to: "/", desc: "Home" },
+  { idx: "m1", to: "/about", desc: "About" },
+];
+const PracticeItemList = [
+  { idx: "p0", to: "/exchangeRate", desc: "匯率換算" },
+  { idx: "p1", to: "/UBike", desc: "ubike!" },
+];
+const IntroItemList = [
+  { idx: "i0", to: "/IntroWeek1", desc: "IntroWeek1(跑版QQ)" },
+  { idx: "i1", to: "/IntroWeek2", desc: "IntroWeek2" },
+];
+export default {
+  components: { Header },
+  data() {
+    return {
+      menuItemList: MenuItemList,
+      practiceItemList: PracticeItemList,
+      introItemList: IntroItemList,
+    };
+  },
+};
+</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

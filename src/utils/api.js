@@ -19,6 +19,19 @@ export function fetchExchangeRate() {
         }, delayTime);
     });
 }
+export function fetchUBike() {
+    const delayTime = (Math.floor(Math.random() * MAX_NUMBER) + MIN_NUMBER) * 100;
+    return new Promise((resolve, reject) => {
+        if (delayTime >= TIMEOUT_ERROR_TIME) {
+            reject("API timeout error");
+            return;
+        }
+        setTimeout(() => {
+            const exchangeRate = useMockApi ? getMockExchangeRate() : getExchangeRate();
+            resolve(exchangeRate);
+        }, delayTime);
+    });
+}
 
 function getExchangeRate() {
     // 請自行申請 https://fixer.io/
