@@ -6,6 +6,16 @@ export default[
     }, {
         path: "/IntroWeek2",
         name: "IntroWeek2",
-        component: () => import ("../views/IntroWeek2.vue")
+        component: () => import ("../views/IntroWeek2.vue"),
+        beforeEnter: (to, from, next) => {
+            console.log('beforeEnter IntroWeek2 ')
+            console.log(to)
+            console.log(from)
+            next()
+        }
+    }, {
+        path: "/IntroWeek2/routerExample",
+        name: "RouterExample",
+        component: () => import ("../views/week2/RouterExample.vue")
     }
 ]

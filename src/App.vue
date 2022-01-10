@@ -1,33 +1,37 @@
 <template>
-  <div id="app">
+  <div id="app" class="flex flex-col">
     <header class="sticky top-0 z-50 m-4">
       <Header />
     </header>
-    <div class="rounded-lg shadow bg-base-200 drawer">
-      <input id="my-drawer" type="checkbox" class="drawer-toggle" />
-      <div
-        class="flex flex-col items-center justify-center drawer-content pb-64"
-      >
-        <router-view />
+    <main>
+      <div class="rounded-lg shadow bg-base-200 drawer">
+        <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+        <div
+          class="flex flex-col items-center justify-center drawer-content pb-64"
+        >
+          <router-view />
+        </div>
+        <div class="drawer-side">
+          <label for="my-drawer" class="drawer-overlay"></label>
+          <ul
+            class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content"
+          >
+            <div class="divider">Menu</div>
+            <li v-for="item in menuItemList" :key="item.idx">
+              <router-link :to="item.to">{{ item.desc }}</router-link>
+            </li>
+            <div class="divider">練習</div>
+            <li v-for="item in practiceItemList" :key="item.idx">
+              <router-link :to="item.to">{{ item.desc }}</router-link>
+            </li>
+            <div class="divider">Intro</div>
+            <li v-for="item in introItemList" :key="item.idx">
+              <router-link :to="item.to">{{ item.desc }}</router-link>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="drawer-side">
-        <label for="my-drawer" class="drawer-overlay"></label>
-        <ul class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
-          <div class="divider">Menu</div>
-          <li v-for="item in menuItemList" :key="item.idx">
-            <router-link :to="item.to">{{ item.desc }}</router-link>
-          </li>
-          <div class="divider">練習</div>
-          <li v-for="item in practiceItemList" :key="item.idx">
-            <router-link :to="item.to">{{ item.desc }}</router-link>
-          </li>
-          <div class="divider">Intro</div>
-          <li v-for="item in introItemList" :key="item.idx">
-            <router-link :to="item.to">{{ item.desc }}</router-link>
-          </li>
-        </ul>
-      </div>
-    </div>
+    </main>
   </div>
 </template>
 
