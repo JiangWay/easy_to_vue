@@ -15,41 +15,67 @@
         <li>
           我的最愛功能 的新增與刪除
         </li>
+        <li>
+          刷新後我的最愛的車輛數量也要跟著更新
+        </li>
       </ol>
     </p>
+    <div class="divider"> 我的最愛</div>
     <table class="table w-full">
       <thead>
         <tr>
           <th></th>
-          <th>Name</th>
-          <th>Job</th>
-          <th>Favorite Color</th>
+          <th>站點名</th>
+          <th>剩餘數/總數</th> 
+          <th></th> 
+
         </tr>
       </thead>
       <tbody>
         <tr>
           <th>1</th>
-          <td>Cy Ganderton</td>
-          <td>Quality Control Specialist</td>
-          <td>Blue</td>
+          <td>大安站</td>
+          <td>11/20</td>
+          <th>移除</th> 
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="divider">一覽表</div>
+    <table class="table w-full">
+      <thead>
+        <tr>
+          <th></th>
+          <th>站點名</th>
+          <th>剩餘數/總數</th> 
+          <th></th> 
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>1</th>
+          <td>大安站</td>
+          <td>11/20</td>
+          <th>加入最愛</th> 
         </tr>
         <tr>
           <th>2</th>
           <td>Hart Hagerty</td>
           <td>Desktop Support Technician</td>
-          <td>Purple</td>
+          <th>加入最愛</th> 
         </tr>
         <tr>
           <th>3</th>
           <td>Brice Swyre</td>
-          <td>Tax Accountant</td>
-          <td>Red</td>
+          <td>Tax Accountant</td>  
+          <th>加入最愛</th> 
+
         </tr>
         <tr>
           <th>4</th>
           <td>Marjy Ferencz</td>
-          <td>Office Assistant I</td>
-          <td>Crimson</td>
+          <td>Office Assistant I</td>   
+          <th>加入最愛</th> 
         </tr>
       </tbody>
     </table>
