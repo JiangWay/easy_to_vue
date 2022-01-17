@@ -17,5 +17,9 @@ export default[
         path: "/IntroWeek2/routerExample",
         name: "RouterExample",
         component: () => import ("../views/week2/RouterExample.vue")
+    }, {
+        path: "/IntroWeek3",
+        name: "IntroWeek3",
+        component: () => import ("../views/IntroWeek3.vue")
     }
 ]

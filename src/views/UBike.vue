@@ -1,7 +1,9 @@
 <template>
-  <div class="overflow-x-auto">
+  <div class="overflow-y-auto">
+    <div class="m-2 rounded-full border-2" @click="$router.push({name:'UBikeIntro'})"> 點我看ubike week3 實作說明
+  </div>
     <p class="indent-8 border-2 border-black m-4 p-4 pl-6 text-left">
-          ubike實作時間
+          ubike week2 實作說明
       <ol class="list-decimal">
         <li>
           呼叫ubike列表電文 (時間點隨意) 並顯示在畫面上
@@ -20,6 +22,7 @@
         </li>
       </ol>
     </p>
+    
     <div class="divider"> 我的最愛</div>
     <table class="table w-full">
       <thead>

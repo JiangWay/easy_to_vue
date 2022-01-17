@@ -1,5 +1,5 @@
 <template>
-  <div class="exchangeRate">
+  <div class="exchangeRate m-2">
     <h1>This is the exchangeRate page</h1>
     <p>1 歐元 = 31.518378台幣</p>
     <ol>
@@ -15,7 +15,7 @@
     <hr />
     <!-- write here... -->
     <ol>
-      <li>
+      <li class="border-2">
         <div class="question">
           簡單的台幣歐元換算 輸入框 點擊換算後 計算 (methods)
         </div>

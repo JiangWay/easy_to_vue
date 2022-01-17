@@ -1,43 +1,36 @@
 <template>
-  <div id="app" class="flex flex-col">
-    <header class="sticky top-0 z-50 m-4">
-      <Header />
-    </header>
-    <main>
-      <div class="rounded-lg shadow bg-base-200 drawer h-full">
-        <input id="my-drawer" type="checkbox" class="drawer-toggle" />
-        <div
-          class="
-            flex flex-col
-            items-center
-            justify-center
-            drawer-content
-            min-h-screen
-          "
-        >
+  <div class="drawer h-screen h-200">
+    <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+    <div class="drawer-content flex flex-col">
+      <header class="sticky top-0 z-50">
+        <Header class="rounded-none" />
+      </header>
+      <main class="">
+        <!-- <keep-alive :max="3" :include="['ExchangeRate']">
           <router-view />
-        </div>
-        <div class="drawer-side">
-          <label for="my-drawer" class="drawer-overlay"></label>
-          <ul
-            class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content"
-          >
-            <div class="divider">Menu</div>
-            <li v-for="item in menuItemList" :key="item.idx">
-              <router-link :to="item.to">{{ item.desc }}</router-link>
-            </li>
-            <div class="divider">練習</div>
-            <li v-for="item in practiceItemList" :key="item.idx">
-              <router-link :to="item.to">{{ item.desc }}</router-link>
-            </li>
-            <div class="divider">Intro</div>
-            <li v-for="item in introItemList" :key="item.idx">
-              <router-link :to="item.to">{{ item.desc }}</router-link>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </main>
+        </keep-alive> -->
+        <keep-alive :max="3" :include="getkeepAliveList">
+          <router-view />
+        </keep-alive>
+      </main>
+    </div>
+    <div class="drawer-side">
+      <label for="my-drawer" class="drawer-overlay"></label>
+      <ul class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
+        <div class="divider">Menu</div>
+        <li v-for="item in menuItemList" :key="item.idx">
+          <router-link :to="item.to">{{ item.desc }}</router-link>
+        </li>
+        <div class="divider">練習</div>
+        <li v-for="item in practiceItemList" :key="item.idx">
+          <router-link :to="item.to">{{ item.desc }}</router-link>
+        </li>
+        <div class="divider">Intro</div>
+        <li v-for="item in introItemList" :key="item.idx">
+          <router-link :to="item.to">{{ item.desc }}</router-link>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -54,6 +47,7 @@ const PracticeItemList = [
 const IntroItemList = [
   { idx: "i0", to: "/IntroWeek1", desc: "IntroWeek1(跑版QQ)" },
   { idx: "i1", to: "/IntroWeek2", desc: "IntroWeek2" },
+  { idx: "i2", to: "/IntroWeek3", desc: "IntroWeek3" },
 ];
 export default {
   components: { Header },
@@ -64,27 +58,11 @@ export default {
       introItemList: IntroItemList,
     };
   },
+  computed: {
+    getkeepAliveList() {
+      return ["IntroWeek3"];
+    },
+  },
 };
 </script>
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="introWeek2 w-full p-2 pt-64">
+  <div class="introWeek2 w-full p-2">
     <h1>I'm introWeek2</h1>
     <div class="divider"></div>
 
