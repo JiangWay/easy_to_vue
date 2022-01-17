@@ -52,38 +52,84 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th>1</th>
-          <td>大安站</td>
-          <td>11/20</td>
-          <th>加入最愛</th> 
-        </tr>
-        <tr>
-          <th>2</th>
-          <td>Hart Hagerty</td>
-          <td>Desktop Support Technician</td>
-          <th>加入最愛</th> 
-        </tr>
-        <tr>
-          <th>3</th>
-          <td>Brice Swyre</td>
-          <td>Tax Accountant</td>  
-          <th>加入最愛</th> 
-
-        </tr>
-        <tr>
-          <th>4</th>
-          <td>Marjy Ferencz</td>
-          <td>Office Assistant I</td>   
+        <tr v-for="ubike in uBikePagination" :key="ubike.sno">
+          <th>{{ubike.sno}}</th>
+          <td>{{ubike.sna}}</td>
+          <td>{{ubike.sbi}}/{{ubike.tot}}</td>
           <th>加入最愛</th> 
         </tr>
       </tbody>
     </table>
+    <div class="flex justify-center">
+      <div class="btn" @click="pageIndex--">上一頁</div>
+      <div>第{{ pageIndex }}頁</div>
+      <div class="btn" @click="pageIndex++">下一頁</div>
+    </div>
   </div>
 </template>
 
 <script>
-export default {};
+// eslint-disable-next-line no-unused-vars
+import { mapState, mapActions, mapGetters } from "vuex";
+import UpdateUBikeListMixin from "@/components/UpdateUBikeListMixin.js";
+export default {
+  mixins: [UpdateUBikeListMixin],
+  data() {
+    return {
+      uBikeList: [],
+      pageIndex: 1,
+      pageSize: 20,
+      myFavoriteStation: [],
+      timeoutID: "",
+    };
+  },
+  async created() {
+    console.log("UBIKE created");
+
+    await this.fetchUBike();
+    // await this.getUBikePagination(10, this.pageIndex);
+    // 新增刷新
+    // this.timeoutID = window.setInterval(
+    //   async () => await this.fetchUBike(),
+    //   1000 * 3
+    // );
+  },
+  methods: {
+    ...mapActions(["fetchUBikeList"]),
+    async fetchUBike() {
+      console.log("excute fetchUBike");
+      await this.fetchUBikeList();
+    },
+    getUBikePagination() {
+      this.uBikeList = this.doUBikePagination(this.pageSize, this.pageIndex);
+    },
+    setMyFavoriteStation(type, ubike, idx) {
+      if (type === "add") {
+        ubike.superLike = false;
+        if (!this.myFavoriteStation.find((u) => u.sno === ubike.sno)) {
+          this.myFavoriteStation.push(ubike);
+        } else {
+          alert("不可重複加入");
+        }
+      } else if (type === "splice") {
+        this.myFavoriteStation.splice(idx, 1);
+      } else if (type === "super") {
+        ubike.superLike = !ubike.superLike;
+        this.myFavoriteStation.splice(idx, 1, ubike);
+      }
+    },
+  },
+  computed: {
+    // ...mapState(["uBikeList"]),
+    ...mapGetters(["getUBikeList", "doUBikePagination"]),
+    uBikePagination() {
+      return this.doUBikePagination(this.pageSize, this.pageIndex);
+    },
+  },
+  beforeDestroy() {
+    // window.clearInterval(this.timeoutID);
+  },
+};
 </script>
 
 <style>

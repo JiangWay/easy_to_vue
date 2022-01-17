@@ -127,8 +127,8 @@ export default {
         ubike.superLike = false;
         if (!this.myFavoriteStation.find((u) => u.sno === ubike.sno)) {
           this.myFavoriteStation.push(ubike);
-        }else{
-          alert('不可重複加入')
+        } else {
+          alert("不可重複加入");
         }
       } else if (type === "pop") {
         this.myFavoriteStation.pop(ubike);

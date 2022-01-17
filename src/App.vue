@@ -4,10 +4,16 @@
       <Header />
     </header>
     <main>
-      <div class="rounded-lg shadow bg-base-200 drawer">
+      <div class="rounded-lg shadow bg-base-200 drawer h-full">
         <input id="my-drawer" type="checkbox" class="drawer-toggle" />
         <div
-          class="flex flex-col items-center justify-center drawer-content pb-64"
+          class="
+            flex flex-col
+            items-center
+            justify-center
+            drawer-content
+            min-h-screen
+          "
         >
           <router-view />
         </div>
