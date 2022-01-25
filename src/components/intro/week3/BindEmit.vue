@@ -53,12 +53,12 @@ export default {
     //   console.log(oldVal);
     // },
     // watch物件的方法
-    // "insideMsgObj.title"(newVal, oldVal) {
-    //   console.log(newVal);
-    //   console.log(oldVal);
-    //   this.insideMsgObj.title = newVal;
-    //   this.$emit("update:msgObj", this.insideMsgObj);
-    // },
+    "insideMsgObj.title"(newVal, oldVal) {
+      console.log(newVal);
+      console.log(oldVal);
+      this.insideMsgObj.title = newVal;
+      this.$emit("update:msgObj", this.insideMsgObj);
+    },
     insideMsgObj: {
       handler(newVal, oldVal) {
         console.log(newVal);

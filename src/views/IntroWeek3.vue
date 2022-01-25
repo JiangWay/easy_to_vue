@@ -7,9 +7,9 @@
       <div class="text-2xl">物件傳子元件時 要特別注意 不要造成污染</div>
       <div>外層msg {{ msg }}</div>
       <div>外層msgObj {{ msgObj }}</div>
-      <BindOne v-bind:msg="msg" v-bind:msgObj="msgObj" />
-      <!-- <BindOne :msg="msg" :msgObj="msgObj" />
-      <BindOne msg="msg" /> -->
+      <!-- <BindOne v-bind:msg="msg" v-bind:msgObj="msgObj" /> -->
+      <!-- <BindOne :msg="msg" :msgObj="msgObj" /> -->
+      <!-- <BindOne msg="msg" /> -->
     </div>
     <div class="divider pt-10"></div>
     <div class="example-1">
@@ -17,7 +17,7 @@
       <div class="text-2xl">雙向綁定正確姿勢</div>
       <div class="text-2xl">props in emit out</div>
       <div>外層msg {{ msgEmit }}</div>
-      <div>外層msgObj {{ msgObj }}</div>
+      <div>外層msgObj {{ msgObjEmit }}</div>
       <!--  sync 語法糖 -->
       <BindEmit v-bind:msg.sync="msgEmit" v-bind:msgObj.sync="msgObjEmit" />
     </div>
@@ -34,8 +34,9 @@
     <div class="divider pt-10"></div>
     <div class="example-3">
       <div class="text-4xl">說明 : keepAlive</div>
-      <button class="btn" @click="changeBindNumber()">點擊切換</button>
-      <keep-alive include="BindOne,BindTwo">
+      <button class="btn" @click="changeBindNumber('m')">點擊-</button>
+      <button class="btn" @click="changeBindNumber('p')">點擊+</button>
+      <keep-alive :max="1" include="BindOne,BindTwo">
         <BindOne v-if="bindNumber === 1" />
         <BindTwo v-if="bindNumber === 2" />
         <BindThree v-if="bindNumber === 3" />
@@ -49,6 +50,11 @@
         去到說明頁再回來時 表單內容需被保留
       </div>
       <div>範例就拿此頁做keepAlive 程式範例請移駕App.vue</div>
+    </div>
+    <div class="divider pt-10"></div>
+    <div class="example-4">
+      <div class="text-4xl">vue bus</div>
+      <div class="btn" @click="callBusAlert">點我呼叫 busAlert!</div>
     </div>
   </div>
 </template>
@@ -87,13 +93,20 @@ export default {
     changeBind() {
       this.useBindOne = !this.useBindOne;
     },
-    changeBindNumber() {
-      this.bindNumber++;
+    changeBindNumber(type) {
+      if (type === "p") {
+        this.bindNumber++;
+      } else {
+        this.bindNumber--;
+      }
       if (this.bindNumber > 3) {
         this.bindNumber = 1;
       }
       console.log(this.bindNumber);
       console.log(this.bindNumber > 4);
+    },
+    callBusAlert() {
+      this.$bus.$emit("busAlert", "呼叫 busAlert!");
     },
   },
   computed: {
