@@ -3,7 +3,7 @@
     <input id="my-drawer" type="checkbox" class="drawer-toggle" />
     <div class="drawer-content flex flex-col">
       <header class="sticky top-0 z-50">
-        <Header class="rounded-none" />
+        <Header class="rounded-none" v-bind="appHeaderProps"/>
       </header>
       <main class="">
         <!-- <keep-alive :max="3" :include="['ExchangeRate']">
@@ -47,8 +47,13 @@ const PracticeItemList = [
 const IntroItemList = [
   { idx: "i0", to: "/IntroWeek1", desc: "IntroWeek1(跑版QQ)" },
   { idx: "i1", to: "/IntroWeek2", desc: "IntroWeek2" },
-  { idx: "i2", to: "/IntroWeek3", desc: "IntroWeek3" },
+  // { idx: "i2", to: "/IntroWeek3", desc: "IntroWeek3" },
+  { idx: "i3", to: "/IntroWeek3_1", desc: "IntroWeek3_1" },
 ];
+const DEFAULT_OPTS = {
+    title:'easy_to_vue',
+    leftIcon:'hamburger' // leftArrow
+}
 export default {
   components: { Header },
   data() {
@@ -56,13 +61,37 @@ export default {
       menuItemList: MenuItemList,
       practiceItemList: PracticeItemList,
       introItemList: IntroItemList,
+      defaultOpts:DEFAULT_OPTS,
+      appHeaderProps:{},
+
     };
+  },
+  created() {
+    this.$bus.$on('setAppHeader',(newOpts)=>{
+      this.setAppHeader(newOpts)
+    })
   },
   computed: {
     getkeepAliveList() {
       return ["IntroWeek3"];
     },
   },
+  methods: {
+    // appHeader控制(有不要顯示上一步,title文字...等)
+    // 在router也有設置
+    setAppHeader ( newOpts) {
+      this.appHeaderProps = Object.assign({}, this.defaultOpts, newOpts)
+    },
+  },
+  watch: {
+    $route (newRoute, oldRoute) {
+      if (newRoute.name !== oldRoute.name) {
+        this.setAppHeader(
+          newRoute.meta.appHeader
+        )
+      }
+    }
+  }
 };
 </script>
 

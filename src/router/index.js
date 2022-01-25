@@ -32,7 +32,10 @@ const routes = [
     }, {
         path: "/UBike/intro",
         name: "UBikeIntro",
-        component: () => import ("../views/UBikeIntro.vue")
+        component: () => import ("../views/UBikeIntro.vue"),
+        meta: {
+            appHeader: { title: 'ubike介紹頁', leftIcon: 'leftArrow' }
+        }
     },
 ]
 

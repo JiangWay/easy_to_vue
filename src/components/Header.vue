@@ -3,7 +3,7 @@
     class="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box"
   >
     <div class="flex-none">
-      <button class="btn btn-square btn-ghost">
+      <button class="btn btn-square btn-ghost" v-if="leftIcon === 'hamburger'">
         <label for="my-drawer" class="drawer-button">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -20,9 +20,12 @@
           </svg>
         </label>
       </button>
+      <button class="btn btn-square btn-ghost" v-else-if="leftIcon === 'leftArrow'" @click="$router.go(-1)">
+          <img src="@/assets/arrow-left.svg" class="inline-block w-6 h-6 stroke-current"/>
+      </button>
     </div>
     <div class="flex-1 px-2 mx-2">
-      <span class="text-lg font-bold"> Easy To Vue </span>
+      <span class="text-lg font-bold"> {{title}} </span>
     </div>
     <div class="flex-none">
       <button class="btn btn-square btn-ghost">
@@ -46,6 +49,16 @@
 
 <script>
 export default {
+  props: {
+    title:{
+      type:String,
+      default:'Easy To Vue'
+    },
+    leftIcon:{
+      type:String,
+      default:'hamburger'// leftArrow
+    },
+  },
   components: {},
 };
 </script>

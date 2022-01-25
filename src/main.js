@@ -5,6 +5,9 @@ import store from './store'
 import axios from "axios";
 import lodash from "lodash"
 import './assets/tailwind.css'
+
+Vue.prototype.$bus = new Vue();
+
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios;
 Vue.prototype.$lodash = lodash;
