@@ -1,82 +1,35 @@
 <template>
   <div class="overflow-y-auto">
-    <div class="m-2 rounded-full border-2" @click="$router.push({name:'UBikeIntro'})"> 點我看ubike week3 實作說明
-  </div>
-    <p class="indent-8 border-2 border-black m-4 p-4 pl-6 text-left">
-          ubike week2 實作說明
-      <ol class="list-decimal">
-        <li>
-          呼叫ubike列表電文 (時間點隨意) 並顯示在畫面上
-        </li>
-        <li>
-          做出分頁功能 可選擇在頁面實現 或在 vuex實現
-        </li>
-        <li>
-          ubike更新頻率為每分鐘一次 如何時間到就呼叫更新呢？ 請記得離開頁面時要取消 可抽成mixin
-        </li>
-        <li>
-          我的最愛功能 的新增與刪除
-        </li>
-        <li>
-          刷新後我的最愛的車輛數量也要跟著更新
-        </li>
-      </ol>
-    </p>
-    
-    <div class="divider"> 我的最愛</div>
-    <table class="table w-full">
-      <thead>
-        <tr>
-          <th></th>
-          <th>站點名</th>
-          <th>剩餘數/總數</th> 
-          <th></th> 
-
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th>1</th>
-          <td>大安站</td>
-          <td>11/20</td>
-          <th>移除</th> 
-        </tr>
-      </tbody>
-    </table>
-    
-    <div class="divider">一覽表</div>
-    <table class="table w-full">
-      <thead>
-        <tr>
-          <th></th>
-          <th>站點名</th>
-          <th>剩餘數/總數</th> 
-          <th></th> 
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="ubike in uBikePagination" :key="ubike.sno">
-          <th>{{ubike.sno}}</th>
-          <td>{{ubike.sna}}</td>
-          <td>{{ubike.sbi}}/{{ubike.tot}}</td>
-          <th>加入最愛</th> 
-        </tr>
-      </tbody>
-    </table>
-    <div class="flex justify-center">
-      <div class="btn" @click="pageIndex--">上一頁</div>
-      <div>第{{ pageIndex }}頁</div>
-      <div class="btn" @click="pageIndex++">下一頁</div>
+    <div
+      class="m-2 rounded-full border-2"
+      @click="$router.push({ name: 'UBikeIntro' })"
+    >
+      點我看ubike week3 實作說明
     </div>
+    <UbikeIntro />
+
+    <div class="divider">我的最愛</div>
+    <MyFavorite :myFavoriteList.sync="myFavoriteList" />
+
+    <div class="divider">一覽表</div>
+    <Overview
+      :ubikeList="uBikePagination"
+      :myFavoriteList.sync="myFavoriteList"
+    />
+    <BtnArea :pageIndex.sync="pageIndex" />
   </div>
 </template>
 
 <script>
 // eslint-disable-next-line no-unused-vars
 import { mapState, mapActions, mapGetters } from "vuex";
-import UpdateUBikeListMixin from "@/components/UpdateUBikeListMixin.js";
+// import UpdateUBikeListMixin from "@/components/UpdateUBikeListMixin.js";
+import UbikeIntro from "@/components/ubike/UbikeIntro.vue";
+import Overview from "@/components/ubike/Overview.vue";
+import MyFavorite from "@/components/ubike/MyFavorite.vue";
+import BtnArea from "@/components/ubike/BtnArea.vue";
 export default {
-  mixins: [UpdateUBikeListMixin],
+  // mixins: [UpdateUBikeListMixin],
   data() {
     return {
       uBikeList: [],
@@ -84,8 +37,10 @@ export default {
       pageSize: 20,
       myFavoriteStation: [],
       timeoutID: "",
+      myFavoriteList: [],
     };
   },
+  components: { UbikeIntro, Overview, MyFavorite, BtnArea },
   async created() {
     console.log("UBIKE created");
 
@@ -126,11 +81,20 @@ export default {
     // ...mapState(["uBikeList"]),
     ...mapGetters(["getUBikeList", "doUBikePagination"]),
     uBikePagination() {
+      console.log("uBikePagination = ", this.pageIndex);
       return this.doUBikePagination(this.pageSize, this.pageIndex);
     },
   },
   beforeDestroy() {
     // window.clearInterval(this.timeoutID);
+  },
+  watch: {
+    pageIndex(newVal) {
+      console.log(newVal);
+    },
+    myFavoriteList(newVal) {
+      console.log(newVal);
+    },
   },
 };
 </script>
