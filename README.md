@@ -51,3 +51,6 @@ tailwindcss
 ### bug 很多？
 
 小弟有空會慢慢修...
+
+### commit 守則
+https://blog.louie.lu/2017/03/21/%E5%A6%82%E4%BD%95%E5%AF%AB%E4%B8%80%E5%80%8B-git-commit-message/
